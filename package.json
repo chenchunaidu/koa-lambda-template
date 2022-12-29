@@ -1,0 +1,42 @@
+{
+  "name": "koa-lambda-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "build-esbuild": "rm -rf dist && esbuild ./src/index --entry-names=[dir]/[name]/index --bundle --minify --sourcemap --platform=node --target=node14.14 --outdir=dist",
+    "build": "npm run build-esbuild  && npm run copy-prisma-schema && npm run zip",
+    "start:dev": "nodemon --ignore tests/ --watch src -e ts,tsx --exec ts-node src/index.ts",
+    "copy-prisma-schema": "cp -r prisma/schema.prisma dist/index",
+    "zip": "zip -r sam/dist.zip dist/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^4.0.0",
+    "@prisma/client": "^4.8.0",
+    "dotenv": "^16.0.3",
+    "koa": "^2.14.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-jwt": "^4.0.3",
+    "koa-router": "^12.0.0",
+    "prisma": "^4.8.0",
+    "serverless-http": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.5",
+    "@types/koa__cors": "^3.3.0",
+    "@types/koa__router": "^12.0.0",
+    "@types/koa-bodyparser": "^4.3.10",
+    "@types/koa-router": "^7.4.4",
+    "@types/node": "^18.11.17",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "esbuild": "^0.16.10",
+    "eslint": "^8.30.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
